@@ -1,4 +1,0 @@
-/Users/moosan63/CLionProjects/atcoder/cmake-build-debug/CMakeFiles/b.dir
-/Users/moosan63/CLionProjects/atcoder/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/moosan63/CLionProjects/atcoder/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/moosan63/CLionProjects/atcoder/cmake-build-debug/CMakeFiles/a.dir
