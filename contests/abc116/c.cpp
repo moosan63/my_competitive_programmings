@@ -34,30 +34,73 @@ Int GCD(Int a, Int b){
 }
 
 int main() {
-    Int N,M;
-    cin >> N>>M;
+    Int N;
+    cin >> N;
     Int ans =0;
 
-    if(N<M){
-        vi X = vi(M);
-        rep(i,M){
-            cin >> X[i];
-        }
-
-        sort(X.begin(), X.end());
-
-        vi L;
-        rep(i,M-1){
-            L.push_back(X[i+1]-X[i]);
-        }
-
-        sort(L.begin(), L.end(), greater<>());
-        Int Ltotal = 0;
-        rep(i,N-1){
-            Ltotal += L[i];
-        }
-        ans = (X[M-1]-X[0]) - Ltotal;
+    vi H = vi(N);
+    rep(i,N){
+        cin >> H[i];
     }
+
+    Int tail=0, head=0;
+    while(head <N && tail <N){
+
+        while(H[head+1]>0 && head <N-1){
+            head++;
+        }
+        int clear =0;
+        for(int i=0; i<N; i++){
+            clear += H[i];
+        }
+        if(clear == 0){
+            break;
+        }
+
+        while(tail<=head){
+            Int minimum = inf;
+            for(int i=tail; i<=head; i++){
+                if(H[i]>0){
+                    minimum = min(H[i],minimum);
+                }
+            }
+
+            for(int i=tail; i<=head; i++){
+                if(H[i]>0){
+                    H[i]-=minimum;
+                }
+            }
+            ans+=minimum;
+
+            // 尻を押す処理
+            while(H[tail] == 0 && tail < N-1){
+                tail++;
+            }
+
+            // 頭を引っ込める処理
+            for(int i=tail; i<=head; i++){
+                if(H[i]==0){
+                    head = i;
+                    break;
+                }
+            }
+
+            if(tail>head){
+                head=tail;
+                break;
+            }
+
+            int clear2 =0;
+            for(int i=0; i<N; i++){
+                clear2 += H[i];
+            }
+            if(clear2 == 0){
+                break;
+            }
+        }
+    }
+
+
 
     cout << ans;
     return 0;
