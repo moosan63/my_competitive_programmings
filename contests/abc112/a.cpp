@@ -42,11 +42,17 @@ Int LCM(Int a, Int b){
 
 
 int main() {
-    Int X,Y;
-    cin >> X>>Y;
+    Int A,X,Y;
+    cin >> A;
 
 
+    if(A==1){
+        cout << "Hello World"<< endl;
+    }else{
+        cin >> X >> Y;
+        Int ans =X+Y;
+        cout << ans<< endl;
+    }
 
-    cout << X+Y/2;
     return 0;
 }

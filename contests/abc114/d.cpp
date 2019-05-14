@@ -56,18 +56,6 @@ int main() {
     cin >> N >> X;
     Int ans = 0;
 
-    string level1 = "BPPPB";
-    burger_memo = vector<string>(51,"");
-    burger_memo[1] = level1;
-    if(N!=1){
-        make_burgar(2,N);
-    }
-    string target = burger_memo[N];
-    rep(i,X){
-        if(target[i]=='P'){
-            ans++;
-        }
-    }
 
     cout << ans;
     return 0;

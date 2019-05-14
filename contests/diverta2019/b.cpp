@@ -33,37 +33,20 @@ Int GCD(Int a, Int b){
     return b;
 }
 
-int even_n(Int n) {
-    return n/2;
-}
-
-int odd_n(Int n){
-    return 3*n+1;
-}
-
 int main() {
-    string S;
+    int R,G,B,N;
 
-    cin >> S;
+    cin >>R>>G>>B>>N;
     Int ans =0;
+    int r = N/R +1;
+    int g = N/G +1;
 
-    vi a;
-    unordered_map<Int,Int> mp;
-    mp[stoi(S)] = 1;
-    a.push_back(0);
-    a.push_back(stoi(S));
-    REP(i,2,1000001){
-        if(a[i-1]%2 == 0){
-            a.push_back(even_n(a[i-1]));
-        }else{
-            a.push_back(odd_n(a[i-1]));
-        }
+    rep(i,r){
+        rep(j,g){
 
-        if(mp[a[i]] != 0){
-            ans = i;
-            break;
-        }else{
-            mp[a[i]] = i;
+            if( (N-(i*R+j*G))%B == 0 && i*R+j*G <= N ){
+                ans++;
+            }
         }
     }
 

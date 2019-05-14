@@ -34,26 +34,28 @@ Int GCD(Int a, Int b){
 }
 
 int main() {
-    int N,T,A;
+    Int N,T;
 
-    cin >>N>>T>>A;
-    Int ans =inf;
-    vi H = vi(N);
+    cin >>N>>T;
+    Int ans = inf;
+    vi c = vi(N);
+    vi t = vi(N);
     rep(i,N){
-        cin >> H[i];
+        cin >> c[i];
+        cin >> t[i];
     }
-    Int minT = inf;
 
     rep(i,N){
-        Int tmp = T*1000-H[i]*6;
-        Int now_diff = abs(A*1000-tmp);
-        if(minT>now_diff){
-            ans = i+1;
+        if(t[i]<=T){
+            ans = min(ans, c[i]);
         }
-        minT = min(minT,abs(A*1000-tmp)) ;
     }
 
+    if(ans == inf){
+        cout << "TLE";
+    }else{
+        cout << ans;
+    }
 
-    cout << ans;
     return 0;
 }

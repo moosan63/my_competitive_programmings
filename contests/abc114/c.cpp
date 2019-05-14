@@ -33,22 +33,36 @@ Int GCD(Int a, Int b){
     return b;
 }
 
-int main() {
-    Int N,K;
-    cin >> N>>K;
-    vi H = vi(N);
-    Int ans =inf;
-
-    rep(i,N){
-        cin >> H[i];
+int dfs(Int number, string target, int count,bool three, bool five, bool seven){
+    if(stoll(target) > number){
+        return 0;
     }
 
-    sort(H.begin(),H.end());
-    Int tree_count = K-1;
-    REP(i,tree_count,N){
-        Int hmin = H[i-tree_count];
-        Int hmax = H[i];
-        ans = min(ans, hmax-hmin);
+    if(target == "0"){
+        target = "";
+    }
+
+    int ans = 0;
+    if(three && five&& seven){
+        ans= 1;
+    }
+    ans += dfs(number, target+"3", count+1, true,five,seven);
+    ans += dfs(number, target+"5", count+1,three,true,seven);
+    ans += dfs(number, target+"7",count+1, three,five,true);
+
+    return  ans;
+}
+
+int main() {
+    Int N;
+    cin >> N;
+    Int ans;
+
+    if(N<357){
+        ans =0;
+    }else{
+        string start ="0";
+        ans = dfs(N, start, 0, false,false,false);
     }
 
     cout << ans << endl;

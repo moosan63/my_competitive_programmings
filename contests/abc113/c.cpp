@@ -44,17 +44,31 @@ int binary_search_index(Int Y, vi &q){
 }
 
 int main() {
-    Int N;
-    cin >>N;
-    vi x = vi(N);
-    vi y = vi(N);
-    vi h = vi(N);
-    rep(i,N){
-        cin >> x[i];
-        cin >> y[i];
-        cin >> h[i];
+    Int N,M;
+    cin >>N>>M;
+    vi P = vi(M);
+    vi Y = vi(M);
+    rep(i,M){
+        cin >> P[i];
+        cin >> Y[i];
     }
 
+    map<Int,vi> mp;
+    rep(i,M){
+        mp[P[i]].push_back(Y[i]);
+    }
+
+    rep(i,N+1){
+        sort(mp[i].begin(),mp[i].end());
+    }
+
+    rep(i,M){
+        stringstream ans;
+        Int yi = binary_search_index(Y[i],mp[P[i]])+1;
+        ans << std::setw(6) << std::setfill('0') << P[i];
+        ans << std::setw(6) << std::setfill('0') << yi;
+        cout << ans.str() << endl;
+    }
 
 
     return 0;

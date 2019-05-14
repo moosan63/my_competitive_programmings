@@ -33,36 +33,44 @@ Int GCD(Int a, Int b){
     return b;
 }
 
-int dfs(Int number, string target, int count,bool three, bool five, bool seven){
-    if(stoll(target) > number){
-        return 0;
-    }
-
-    if(target == "0"){
-        target = "";
-    }
-
-    int ans = 0;
-    if(three && five&& seven){
-        ans= 1;
-    }
-    ans += dfs(number, target+"3", count+1, true,five,seven);
-    ans += dfs(number, target+"5", count+1,three,true,seven);
-    ans += dfs(number, target+"7",count+1, three,five,true);
-
-    return  ans;
-}
-
 int main() {
     Int N;
+    vector<string> S;
+    Int firstB =0;
+    Int lastA =0;
+    Int both =0;
     cin >> N;
-    Int ans;
+    Int ans=0;
 
-    if(N<357){
-        ans =0;
-    }else{
-        string start ="0";
-        ans = dfs(N, start, 0, false,false,false);
+    rep(i,N){
+        string s;
+        cin >> s;
+        rep(j,s.size()-1){
+            if(s[j]=='A' && s[j+1] == 'B'){
+                ans++;
+            }
+        }
+        if (s[0] == 'B' && s[s.size()-1] == 'A'){
+            both++;
+        }else{
+            if(s[0] == 'B'){
+                firstB++;
+            }
+            if(s[s.size()-1] == 'A'){
+                lastA++;
+            }
+        }
+    }
+
+
+    ans+= min(firstB,lastA);
+    if(both >0){
+        if(firstB != lastA){
+            ans+= both-1;
+            ans++;
+        }else{
+            ans += both-1;
+        }
     }
 
     cout << ans << endl;

@@ -3,7 +3,7 @@ project(atcoder)
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(TARGET_CONTEST contests/abc116)
+set(TARGET_CONTEST contests/abc111)
 
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wno-unused-command-line-argument -I/usr/local/include/c++/v1 -L/usr/local/lib -I/opt/boost/clang/include -L/opt/boost/clang/lib -std=c++14 -stdlib=libc++")
 

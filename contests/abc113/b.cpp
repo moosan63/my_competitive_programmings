@@ -21,9 +21,6 @@ using Int = long long;
 Int inf = 1000000000000000001LL;
 using vi = vector<Int>;
 using vvi = vector<vi>;
-using pii = pair<Int,Int>;
-using mapis = unordered_map<Int,string>;
-using mapii = unordered_map<Int,Int>;
 
 Int GCD(Int a, Int b){
     if(b==0) return a;
@@ -36,14 +33,27 @@ Int GCD(Int a, Int b){
     return b;
 }
 
-Int LCM(Int a, Inb){
-    return a*b/GCD(a,b);
-}
-
 int main() {
-    Int T,A;
-    cin >> T>>A;
+    int N,T,A;
 
-    cout << T/A;
+    cin >>N>>T>>A;
+    Int ans =inf;
+    vi H = vi(N);
+    rep(i,N){
+        cin >> H[i];
+    }
+    Int minT = inf;
+
+    rep(i,N){
+        Int tmp = T*1000-H[i]*6;
+        Int now_diff = abs(A*1000-tmp);
+        if(minT>now_diff){
+            ans = i+1;
+        }
+        minT = min(minT,abs(A*1000-tmp)) ;
+    }
+
+
+    cout << ans;
     return 0;
 }

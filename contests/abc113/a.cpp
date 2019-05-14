@@ -36,14 +36,17 @@ Int GCD(Int a, Int b){
     return b;
 }
 
-Int LCM(Int a, Inb){
+Int LCM(Int a, Int b){
     return a*b/GCD(a,b);
 }
 
-int main() {
-    Int T,A;
-    cin >> T>>A;
 
-    cout << T/A;
+int main() {
+    Int X,Y;
+    cin >> X>>Y;
+
+
+
+    cout << X+Y/2;
     return 0;
 }
