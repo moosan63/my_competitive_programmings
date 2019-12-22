@@ -13,7 +13,7 @@ vector<Int> back_cost;
 vector<int> back_done;
 const Int inf = 100000000000000000LL;
 
-int dijkstra1n(int start, int goal, int N){
+int dijkstra1n(int start, int goal, int N, ){
     Int min, target;
     target = -1;
     cost[start] = 0;

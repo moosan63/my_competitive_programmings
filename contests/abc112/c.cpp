@@ -49,12 +49,57 @@ int main() {
     vi x = vi(N);
     vi y = vi(N);
     vi h = vi(N);
+
+    int xx;
+    int yy;
+    int hh;
+
     rep(i,N){
         cin >> x[i];
         cin >> y[i];
         cin >> h[i];
+        if (h[i]>=1){
+            xx = x[i];
+            yy = y[i];
+            hh = h[i];
+        }
     }
 
+    if (N==1){
+        cout << x[0] << " " << y[0] << " " << h[0] << endl;
+        return 0;
+    }
+
+    vvi cands = vvi(101,vi(101,0));
+    rep(i,101){
+        rep(j,101){
+            cands[i][j] = max(abs(i-xx)+abs(j-yy)+hh,0LL);
+        }
+    }
+
+    Int H = -1;
+    int X = -1000;
+    int Y = -1000;
+    bool flag;
+    rep(i,101){
+        rep(j,101){
+            flag = true;
+            Int tmp_h = cands[i][j];
+            rep(k,N){
+                Int ans_tmp = max(tmp_h - abs(i-x[k])-abs(j-y[k]),0LL);
+                if(h[k] != ans_tmp){
+                    flag = false;
+                }
+            }
+            if(flag){
+                X=i;
+                Y=j;
+                H=max(cands[i][j],0LL);
+            }
+        }
+    }
+
+    cout << X << " " << Y << " " << H << endl;
 
 
     return 0;

@@ -34,28 +34,17 @@ Int GCD(Int a, Int b){
 }
 
 int main() {
-    Int N,T;
-
-    cin >>N>>T;
-    Int ans = inf;
-    vi c = vi(N);
-    vi t = vi(N);
-    rep(i,N){
-        cin >> c[i];
-        cin >> t[i];
-    }
-
-    rep(i,N){
-        if(t[i]<=T){
-            ans = min(ans, c[i]);
+    Int N;
+    cin >>N;
+    int ans = 0;
+    REP(i,1,10){
+        N-= 111;
+        if(N<=0){
+            ans = i*100+i*10+i;
+            break;
         }
     }
 
-    if(ans == inf){
-        cout << "TLE";
-    }else{
-        cout << ans;
-    }
-
+    cout<<ans<<endl;
     return 0;
 }
