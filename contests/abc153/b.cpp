@@ -14,7 +14,6 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
-#include <math.h>
 #define REP(i, b, n) for (Int i = b; i < Int(n); i++)
 #define rep(i, n) REP(i, 0, n)
 using namespace std;
@@ -22,9 +21,9 @@ using Int = long long;
 Int inf = 1000000000000000001LL;
 using vi = vector<Int>;
 using vvi = vector<vi>;
-using pii = pair<Int,Int>;
 using mapis = unordered_map<Int,string>;
 using mapii = unordered_map<Int,Int>;
+using pii = pair<Int,Int>;
 
 Int GCD(Int a, Int b){
     if(b==0) return a;
@@ -38,41 +37,36 @@ Int GCD(Int a, Int b){
 }
 
 Int LCM(Int a, Int b){
-    return a*b/GCD(a,b);
+    return a * b / GCD(a, b);
 }
 
+Int printX(Int r, Int D, Int X, int count){
+    if(count == 10){
+        return 0;
+    }
+    Int nextX = r*X - D;
+    cout<< nextX <<endl;
+    printX(r,D,nextX,count+1);
+
+}
+
+int myPow(int x, int p) {
+    if (p == 0) return 1;
+    if (p == 1) return x;
+    return x * myPow(x, p-1);
+}
 
 int main() {
-    Int N;
-    Int ans = 0;
-    cin >> N;
+    int a,b;
+    cin >>a >> b;
 
-    string S;
-    cin >> S;
-
-    rep(i,1000){
-        ostringstream ss;
-        ss << std::setw(3) << std::setfill('0') << i;
-
-        string cand = ss.str();
-        string tmp = S;
-        int cand_i=0;
-        rep(j,S.size()){
-            if(S[j]==cand[cand_i]){
-                cand_i++;
-            }
-            if(cand_i==3){
-                break;
-            }
-        }
-
-        if(cand_i == 3){
-            ans++;
-        }
+    int cand = max(a,b);
+    int less = min(a,b);
+    rep(i,cand){
+        cout << less;
     }
+    cout << endl;
 
-
-    cout << ans << endl;
 
     return 0;
 }

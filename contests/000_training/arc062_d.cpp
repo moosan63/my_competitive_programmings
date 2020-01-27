@@ -43,36 +43,31 @@ Int LCM(Int a, Int b){
 
 
 int main() {
-    Int N;
-    Int ans = 0;
-    cin >> N;
+    string s;
 
-    string S;
-    cin >> S;
+    cin >> s;
 
-    rep(i,1000){
-        ostringstream ss;
-        ss << std::setw(3) << std::setfill('0') << i;
+    Int win = 0;
+    Int lose = 0;
 
-        string cand = ss.str();
-        string tmp = S;
-        int cand_i=0;
-        rep(j,S.size()){
-            if(S[j]==cand[cand_i]){
-                cand_i++;
+    Int p_count=0;
+
+    rep(i,s.size()){
+        if(p_count > 0){
+            if(s[i]=='g'){
+                win++;
             }
-            if(cand_i==3){
-                break;
+            p_count--;
+        }else{
+            if(s[i]=='p'){
+                lose++;
             }
-        }
-
-        if(cand_i == 3){
-            ans++;
+            p_count++;
         }
     }
 
 
-    cout << ans << endl;
+    cout << win-lose << endl;
 
     return 0;
 }

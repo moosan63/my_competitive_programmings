@@ -43,36 +43,39 @@ Int LCM(Int a, Int b){
 
 
 int main() {
-    Int N;
-    Int ans = 0;
-    cin >> N;
+    Int N,K,count=0;
+    Int mod=1000000000+7;
+    cin >> N >> K;
 
-    string S;
-    cin >> S;
+    vi A = vi(N);
 
-    rep(i,1000){
-        ostringstream ss;
-        ss << std::setw(3) << std::setfill('0') << i;
+    rep(i,N){
+        cin >> A[i];
+    }
 
-        string cand = ss.str();
-        string tmp = S;
-        int cand_i=0;
-        rep(j,S.size()){
-            if(S[j]==cand[cand_i]){
-                cand_i++;
+    rep(i,A.size()){
+        Int tmp_count = 0;
+        REP(j,i+1,A.size()){
+            if(A[i]>A[j]){tmp_count++;}
+        }
+        count+=(tmp_count*K)%mod;
+    }
+
+    if (K>1){
+        rep(i,A.size()){
+            Int tmp_count = 0;
+            REP(j,0,A.size()){
+                if(A[i]>A[j]){tmp_count++;}
             }
-            if(cand_i==3){
-                break;
-            }
+            int hoge = K*(K-1)/2%mod;
+            count+=((tmp_count)*hoge)%mod;
         }
 
-        if(cand_i == 3){
-            ans++;
-        }
+
     }
 
 
-    cout << ans << endl;
+    cout << count%mod << endl;
 
     return 0;
 }

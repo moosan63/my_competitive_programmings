@@ -43,36 +43,31 @@ Int LCM(Int a, Int b){
 
 
 int main() {
-    Int N;
-    Int ans = 0;
-    cin >> N;
-
     string S;
-    cin >> S;
+    Int t;
+    cin >> S >> t;
 
-    rep(i,1000){
-        ostringstream ss;
-        ss << std::setw(3) << std::setfill('0') << i;
-
-        string cand = ss.str();
-        string tmp = S;
-        int cand_i=0;
-        rep(j,S.size()){
-            if(S[j]==cand[cand_i]){
-                cand_i++;
-            }
-            if(cand_i==3){
-                break;
-            }
-        }
-
-        if(cand_i == 3){
-            ans++;
-        }
+    mapii point_counts;
+    rep(i,S.size()){
+        point_counts[S[i]]++;
     }
 
+    if(t==1){
+        Int x = abs(point_counts['L']-point_counts['R']);
+        Int y = abs(point_counts['U']-point_counts['D']);
 
-    cout << ans << endl;
+        cout << x+y+point_counts['?'] << endl;
+    }else{
+        Int x = abs(point_counts['L']-point_counts['R']);
+        Int y = abs(point_counts['U']-point_counts['D']);
+
+        if( (x+y)>=point_counts['?'] ) {
+            cout << x+y-point_counts['?'] << endl;
+        }else{
+            cout << (point_counts['?']-(x+y))%2 << endl;
+        }
+
+    }
 
     return 0;
 }

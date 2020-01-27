@@ -14,7 +14,6 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
-#include <math.h>
 #define REP(i, b, n) for (Int i = b; i < Int(n); i++)
 #define rep(i, n) REP(i, 0, n)
 using namespace std;
@@ -40,39 +39,41 @@ Int GCD(Int a, Int b){
 Int LCM(Int a, Int b){
     return a*b/GCD(a,b);
 }
-
+Int MOD = 1000000000+7;
 
 int main() {
-    Int N;
-    Int ans = 0;
-    cin >> N;
+    Int H,N;
+    cin >> H >> N;
+    vector<pii> magics;
+    mapii max_b;
 
-    string S;
-    cin >> S;
+    rep(i,N){
+        Int a,b;
+        cin >> a >> b;
+        magics.emplace_back(make_pair(a,b));
+    }
 
-    rep(i,1000){
-        ostringstream ss;
-        ss << std::setw(3) << std::setfill('0') << i;
+    sort(magics.begin(),magics.end());
 
-        string cand = ss.str();
-        string tmp = S;
-        int cand_i=0;
-        rep(j,S.size()){
-            if(S[j]==cand[cand_i]){
-                cand_i++;
+    vi HP = vi(H+1,10000000000LL);
+
+    HP[1] = magics[0].second;
+
+    REP(i,1,H+1){
+        rep(j,N){
+            int cand;
+            if(i<=magics[j].first){
+                HP[i] = min(HP[i], magics[j].second);
+            }else{
+                cand = i-magics[j].first;
+                HP[i] = min(HP[i], HP[cand]+magics[j].second);
             }
-            if(cand_i==3){
-                break;
-            }
-        }
 
-        if(cand_i == 3){
-            ans++;
+
         }
     }
 
-
-    cout << ans << endl;
+    cout << HP[H] << endl;
 
     return 0;
 }

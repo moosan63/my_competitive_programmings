@@ -43,36 +43,23 @@ Int LCM(Int a, Int b){
 
 
 int main() {
-    Int N;
-    Int ans = 0;
-    cin >> N;
+    Int A,B,C;
 
-    string S;
-    cin >> S;
+    cin >> A >> B >> C;
 
-    rep(i,1000){
-        ostringstream ss;
-        ss << std::setw(3) << std::setfill('0') << i;
-
-        string cand = ss.str();
-        string tmp = S;
-        int cand_i=0;
-        rep(j,S.size()){
-            if(S[j]==cand[cand_i]){
-                cand_i++;
-            }
-            if(cand_i==3){
-                break;
-            }
+    int now = A;
+    while(now<=B*100){
+        if(now%B==C){
+            cout << "YES" << endl;
+            return 0;
         }
-
-        if(cand_i == 3){
-            ans++;
-        }
+        now+=A;
     }
 
 
-    cout << ans << endl;
+
+    cout <<  "NO" << endl;
+
 
     return 0;
 }

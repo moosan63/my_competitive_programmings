@@ -14,6 +14,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
+#include <cmath>
 #define REP(i, b, n) for (Int i = b; i < Int(n); i++)
 #define rep(i, n) REP(i, 0, n)
 using namespace std;
@@ -48,6 +49,17 @@ Int modinv(Int a, Int m) {
     return u;
 }
 
+Int binary_search_index(Int Y, vi &q){
+    int left = 0, right = q.size() - 1;
+    while (right >= left) {
+        int mid = left + (right - left) / 2;
+        if (q[mid] == Y) return mid;
+        else if (q[mid] > Y) right = mid - 1;
+        else if (q[mid] < Y) left = mid + 1;
+    }
+    return -1;
+}
+
 bool compare_by_b(pair<int, int> a, pair<int, int> b) {
     if(a.second != b.second){
         return a.second < b.second;
@@ -56,40 +68,58 @@ bool compare_by_b(pair<int, int> a, pair<int, int> b) {
     }
 }
 
+int root_sum(int target, vi &parents, vi &nodes_value, vi &memo, int sum){
+    if(memo[target] != -1){
+        sum += memo[target];
+        return sum;
+    }
+    if (parents[target] == target){
+        sum+=nodes_value[target];
+        return sum;
+    }else{
+        sum+=nodes_value[target];
+        return root_sum(parents[target],parents, nodes_value, memo, sum);
+    }
+}
 
-// LISとは最長増加部分列
-// https://qiita.com/python_walker/items/d1e2be789f6e7a0851e5
+// memoには数え上げた素数を入れていく
+bool is_prime(Int n, map<Int,Int> &memo){
+    if(memo[n] == 1){
+        return false;
+    }else if(memo[n] == 2){
+        return true;
+    }
+
+    bool prime = true;
+    for(Int i =2; i<=sqrt(n)+2; i++){
+        if(memo[i]==2 && n%i==0){
+            prime = false;
+        }
+    }
+    if(prime){
+        memo[n] = 2;
+    }else{
+        memo[n] = 1;
+    }
+
+    return prime;
+}
+
+
+
 int main() {
     Int N;
     cin >> N;
 
-    vi c = vi(N);
+    vi a = vi(N);
+    vi cand;
 
     rep(i,N){
-        cin >> c[i];
+        cin >> a[i];
     }
 
-    vector<int> dp = vector<int>(N+1,9999999);
-    dp[0]=c[0];
 
-    REP(i,1,N){
-        if (c[i] > dp[dp.size()-1]){
-            dp[dp.size()] = c[i];
-        }else{
-            int next = lower_bound(dp.begin(),dp.end(), c[i])-dp.begin();
-            dp[next] = c[i];
-        }
-    }
 
-    int cand =0;
-    REP(i,0,N){
-        if(dp[i] == 9999999){
-            break;
-        }
-        cand = i+1;
-    }
-
-    cout << N-cand << endl;
 
     return 0;
 }

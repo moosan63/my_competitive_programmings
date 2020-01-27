@@ -2,34 +2,25 @@ require 'pp'
 require 'prime'
 require 'set'
 
-N=gets.chomp.split(' ').map{|n| n.to_i}.first
-#
-# if Prime.prime?(N)
-#   puts N-1
-#   exit
-# end
-#
-# a=0
-# b=0
-#
-# mini = 1_000_000_000_000_0
-# source = Math.sqrt(N).to_i+1
-# 1.upto(source) do |n|
-#   next if N%n!=0
-#   a=n
-#   b=N/n
-#   if ((a-1 + b-1) < mini)
-#     mini = a-1 + b-1
-#   end
-# end
-#
-# puts mini
-#
-#
-#
 
-# a,b,x=gets.chomp.split(' ').map{|n| n.to_f}
+N=gets.chomp.split(' ').map{|n| n}.first
 
+keta = N.chars.size
 
+ans = 0;
+now_keta =1;
+N.chars[0..-2].map(&:to_i).reverse.each do |n|
+  puts 9**(keta -2)
+  puts n*(9**(keta -2))
+  ans= ans + (n*9**(keta -2))
 
-puts ans
+  ans = ans+ n*now_keta
+  keta-=1
+  now_keta+=1
+end
+
+if N.to_i.odd?
+  puts 0
+else
+  puts ans
+end

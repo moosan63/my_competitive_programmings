@@ -44,35 +44,28 @@ Int LCM(Int a, Int b){
 
 int main() {
     Int N;
-    Int ans = 0;
     cin >> N;
+    vi A = vi(N);
+    int ans = 0;
 
-    string S;
-    cin >> S;
+    rep(i,N){
+        cin >> A[i];
+    }
 
-    rep(i,1000){
-        ostringstream ss;
-        ss << std::setw(3) << std::setfill('0') << i;
+    sort(A.begin(),A.end(),greater<int>());
 
-        string cand = ss.str();
-        string tmp = S;
-        int cand_i=0;
-        rep(j,S.size()){
-            if(S[j]==cand[cand_i]){
-                cand_i++;
-            }
-            if(cand_i==3){
-                break;
-            }
-        }
+    Int max = A[0];
 
-        if(cand_i == 3){
-            ans++;
+    REP(i,1,A.size()){
+        if(A[i]!=max){
+            cout << A[i] << endl;
+            return 0;
         }
     }
 
 
-    cout << ans << endl;
+    cout <<  max << endl;
+
 
     return 0;
 }

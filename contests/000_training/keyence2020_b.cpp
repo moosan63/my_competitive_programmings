@@ -44,33 +44,31 @@ Int LCM(Int a, Int b){
 
 int main() {
     Int N;
-    Int ans = 0;
     cin >> N;
 
-    string S;
-    cin >> S;
+    vi X,L;
+    X = vi(N);
+    L = vi(N);
 
-    rep(i,1000){
-        ostringstream ss;
-        ss << std::setw(3) << std::setfill('0') << i;
 
-        string cand = ss.str();
-        string tmp = S;
-        int cand_i=0;
-        rep(j,S.size()){
-            if(S[j]==cand[cand_i]){
-                cand_i++;
-            }
-            if(cand_i==3){
-                break;
-            }
-        }
-
-        if(cand_i == 3){
-            ans++;
-        }
+    vector<pair<Int,Int>> Ps;
+    rep(i,N){
+        cin >> X[i] >> L[i];
+        Ps.emplace_back(make_pair(X[i]+L[i],X[i]-L[i]));
     }
 
+    sort(Ps.begin(),Ps.end());
+
+    Int ans = 0;
+    Int now = -1000000000;
+
+    rep(i,N){
+        if(now <= Ps[i].second){
+            ans++;
+            now = Ps[i].first;
+        }
+
+    }
 
     cout << ans << endl;
 

@@ -14,7 +14,6 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
-#include <math.h>
 #define REP(i, b, n) for (Int i = b; i < Int(n); i++)
 #define rep(i, n) REP(i, 0, n)
 using namespace std;
@@ -43,36 +42,30 @@ Int LCM(Int a, Int b){
 
 
 int main() {
-    Int N;
-    Int ans = 0;
-    cin >> N;
+    int a,b;
 
-    string S;
-    cin >> S;
+    cin >> a >> b;
 
-    rep(i,1000){
-        ostringstream ss;
-        ss << std::setw(3) << std::setfill('0') << i;
+    //cout <<std::fixed<< setprecision(10) <<  ans << endl;
 
-        string cand = ss.str();
-        string tmp = S;
-        int cand_i=0;
-        rep(j,S.size()){
-            if(S[j]==cand[cand_i]){
-                cand_i++;
-            }
-            if(cand_i==3){
-                break;
-            }
-        }
+    map<int,int> aa;
 
-        if(cand_i == 3){
-            ans++;
-        }
+    aa[a]=1;
+    aa[b]=1;
+
+    if(aa[1]==0){
+        cout << 1 << endl;
+        return 0;
+    }
+    if(aa[2]==0){
+        cout << 2 << endl;
+        return 0;
+    }
+    if(aa[3]==0){
+        cout << 3<<endl;
+        return 0;
     }
 
-
-    cout << ans << endl;
 
     return 0;
 }

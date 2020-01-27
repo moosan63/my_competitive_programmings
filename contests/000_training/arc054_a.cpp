@@ -41,38 +41,45 @@ Int LCM(Int a, Int b){
     return a*b/GCD(a,b);
 }
 
+Int count(Int n, Int x){
+    if(n == -1){
+        return 0;
+    }
+
+    return n/x +1;
+}
+
 
 int main() {
-    Int N;
-    Int ans = 0;
-    cin >> N;
+    long double L,X,Y,S,D;
+    cin >> L >> X >> Y >> S >>D;
 
-    string S;
-    cin >> S;
+    long double ans;
 
-    rep(i,1000){
-        ostringstream ss;
-        ss << std::setw(3) << std::setfill('0') << i;
+    if(S==D){
+        cout << 0 << endl;
+        return 0;
+    }
 
-        string cand = ss.str();
-        string tmp = S;
-        int cand_i=0;
-        rep(j,S.size()){
-            if(S[j]==cand[cand_i]){
-                cand_i++;
-            }
-            if(cand_i==3){
-                break;
-            }
+    if(S<D){
+        if( X>=Y ){
+            ans = (D-S)/(X+Y);
+        }else{
+            ans = min(((L-D)+S)/double(abs(Int(X)-Int(Y))), (D-S)/(X+Y));
         }
 
-        if(cand_i == 3){
-            ans++;
+    }else{
+        if( X>=Y ) {
+            ans = ((L-S)+D)/(X+Y);
+        }else{
+            ans = min( ((L-S)+D)/(X+Y), (S-D)/double(abs(Int(X)-Int(Y))));
         }
     }
 
 
-    cout << ans << endl;
+
+    cout <<std::fixed<< setprecision(10) <<  ans << endl;
+
 
     return 0;
 }

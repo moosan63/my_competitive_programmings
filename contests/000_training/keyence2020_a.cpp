@@ -1,3 +1,7 @@
+//
+// Created by 村上怜 on 2020-01-18.
+//
+
 #include <algorithm>
 #include <bitset>
 #include <cstdio>
@@ -43,32 +47,15 @@ Int LCM(Int a, Int b){
 
 
 int main() {
-    Int N;
-    Int ans = 0;
-    cin >> N;
+    Int H,W,K;
+    cin >> H >> W >> K;
 
-    string S;
-    cin >> S;
+    Int cand = max(H,W);
 
-    rep(i,1000){
-        ostringstream ss;
-        ss << std::setw(3) << std::setfill('0') << i;
+    Int ans = K/cand;
 
-        string cand = ss.str();
-        string tmp = S;
-        int cand_i=0;
-        rep(j,S.size()){
-            if(S[j]==cand[cand_i]){
-                cand_i++;
-            }
-            if(cand_i==3){
-                break;
-            }
-        }
-
-        if(cand_i == 3){
-            ans++;
-        }
+    if(K%cand > 0){
+        ans++;
     }
 
 

@@ -43,36 +43,43 @@ Int LCM(Int a, Int b){
 
 
 int main() {
-    Int N;
-    Int ans = 0;
-    cin >> N;
+    string Sd,T;
+    vector<string> candidates;
 
-    string S;
-    cin >> S;
+    cin >> Sd >> T;
 
-    rep(i,1000){
-        ostringstream ss;
-        ss << std::setw(3) << std::setfill('0') << i;
-
-        string cand = ss.str();
-        string tmp = S;
-        int cand_i=0;
-        rep(j,S.size()){
-            if(S[j]==cand[cand_i]){
-                cand_i++;
-            }
-            if(cand_i==3){
+    rep(i,Sd.size()-T.size()+1){
+        bool match = true;
+        rep(j,T.size()){
+            if(Sd[i+j]!=T[j] && Sd[i+j] != '?'){
+                match = false;
                 break;
             }
         }
-
-        if(cand_i == 3){
-            ans++;
+        if(match){
+            string tmpS;
+            rep(j,Sd.size()){
+                if(i==j){
+                    tmpS+=T;
+                    j+=T.size()-1;
+                }else{
+                    if(Sd[j]=='?'){
+                        tmpS+= 'a';
+                    }else{
+                        tmpS+= Sd[j];
+                    }
+                }
+            }
+            candidates.push_back(tmpS);
         }
     }
 
-
-    cout << ans << endl;
+    if(candidates.empty()){
+        cout << "UNRESTORABLE" << endl;
+    }else{
+        sort(candidates.begin(),candidates.end());
+        cout << candidates[0] << endl;
+    }
 
     return 0;
 }
